@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://c3tasi0hcvc30"]
+
+[ext_resource type="PackedScene" uid="uid://cqy7taq62ypkn" path="res://scenes/soft_body_fish.tscn" id="1_lwfdm"]
+[ext_resource type="PackedScene" uid="uid://bmrla8wes5255" path="res://scenes/soft_body_fish_2.tscn" id="2_7nacw"]
+[ext_resource type="PackedScene" uid="uid://bkn3jjf0wc56b" path="res://scenes/soft_body_old_man.tscn" id="3_iw63h"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0pdhl"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_foemg"]
+sky_material = SubResource("ProceduralSkyMaterial_0pdhl")
+
+[sub_resource type="Environment" id="Environment_37lnr"]
+background_mode = 2
+sky = SubResource("Sky_foemg")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_okta8"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_abupy"]
+size = Vector3(10, 1, 10)
+
+[node name="DebugScene" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_37lnr")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.1557, 0.424231, -0.892068, -0.0210412, 0.901452, 0.432366, 0.98758, 0.0860896, -0.13143, 42.8102, 158.894, 70.5949)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.111243, 0.993793, 0, -0.993793, -0.111243, 0, 1.74357, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(117.508, 0, 0, 0, 1, 0, 0, 0, 119.819, 0, 0, 0)
+mesh = SubResource("BoxMesh_okta8")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0723125, 0)
+shape = SubResource("BoxShape3D_abupy")
+
+[node name="SoftBodyFish" parent="." instance=ExtResource("1_lwfdm")]
+transform = Transform3D(0.621389, 0.783502, 0, -1.73972e-16, 1.37976e-16, 1, 0.783502, -0.621389, 2.22045e-16, -34, 1.5395, 68)
+damping_coefficient = 0.69
+
+[node name="SoftBodyFish_2" parent="." instance=ExtResource("2_7nacw")]
+transform = Transform3D(0.621389, 0.783502, 0, -1.73972e-16, 1.37976e-16, 1, 0.783502, -0.621389, 2.22045e-16, -32.7962, 1.20656, 68.9073)
+
+[node name="SoftBodyFish_3" parent="." instance=ExtResource("2_7nacw")]
+transform = Transform3D(0.621389, 0.783502, 0, -1.73972e-16, 1.37976e-16, 1, 0.783502, -0.621389, 2.22045e-16, -33.8614, 1.20656, 68.9073)
+
+[node name="SoftBodyFish_4" parent="." instance=ExtResource("2_7nacw")]
+transform = Transform3D(0.621389, 0.783502, 0, -1.73972e-16, 1.37976e-16, 1, 0.783502, -0.621389, 2.22045e-16, -33.8614, 1.20656, 67.7312)
+
+[node name="OldManContainer" parent="." instance=ExtResource("3_iw63h")]
+transform = Transform3D(0.3, 0, 0, 0, 0.259285, 0.150901, 0, -0.150901, 0.259285, 206.063, 0.572311, 127.995)

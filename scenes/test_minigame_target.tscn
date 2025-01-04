@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpeh05kit1h27"]
+
+[ext_resource type="Script" path="res://script/test_minigame_target.gd" id="1_67ibv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ifux1"]
+radius = 24.8889
+
+[node name="PathFollow2D" type="PathFollow2D" node_paths=PackedStringArray("minigameTarget")]
+script = ExtResource("1_67ibv")
+minigameTarget = NodePath("MiniGameTarget")
+
+[node name="MiniGameTarget" type="Polygon2D" parent="."]
+position = Vector2(-0.459459, 1.90735e-06)
+scale = Vector2(1.54233, -1.59021)
+color = Color(0.945098, 0.67451, 0, 1)
+polygon = PackedVector2Array(-17, -22, -17, 17, 20, 17, 20, -22)
+
+[node name="Area2D" type="Area2D" parent="MiniGameTarget"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MiniGameTarget/Area2D"]
+position = Vector2(2, 0)
+shape = SubResource("CircleShape2D_ifux1")

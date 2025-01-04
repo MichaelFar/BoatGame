@@ -1,0 +1,99 @@
+[gd_scene load_steps=9 format=3 uid="uid://wl0j5bt5sqbx"]
+
+[ext_resource type="Script" path="res://scenes/testMinigame.gd" id="1_m3qmg"]
+[ext_resource type="PackedScene" uid="uid://bpeh05kit1h27" path="res://scenes/test_minigame_target.tscn" id="2_7eunl"]
+[ext_resource type="Texture2D" uid="uid://cbwua7fejd8ot" path="res://texture/minigameExperimentHigherResolution.png" id="4_ux6p2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_shgy5"]
+line_spacing = 60.0
+font_size = 45
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Curve2D" id="Curve2D_ibjcb"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 300, 297, 0, 0, 0, 0, 311, 329, 0, 0, 0, 0, 323, 357, 0, 0, 0, 0, 337, 377, 0, 0, 0, 0, 349, 397, 0, 0, 0, 0, 366, 413, 0, 0, 0, 0, 383, 432, 0, 0, 0, 0, 403, 448, 0, 0, 0, 0, 427, 464, 0, 0, 0, 0, 454, 479, 0, 0, 0, 0, 481, 492, 0, 0, 0, 0, 512, 501, 0, 0, 0, 0, 544, 505, 0, 0, 0, 0, 574, 508, 0, 0, 0, 0, 608, 505, 0, 0, 0, 0, 642, 499, 0, 0, 0, 0, 680, 488, 0, 0, 0, 0, 716, 472, 0, 0, 0, 0, 746, 454, 0, 0, 0, 0, 772, 432, 0, 0, 0, 0, 798, 405, 0, 0, 0, 0, 825, 370, 0, 0, 0, 0, 840, 340, 0, 0, 0, 0, 855, 304)
+}
+point_count = 24
+
+[sub_resource type="Curve" id="Curve_kd7b6"]
+_data = [Vector2(0.0244399, 0.0282468), 0.0, 0.0, 0, 0, Vector2(1, 0.411126), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_4ut2e"]
+curve = SubResource("Curve_kd7b6")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l57ib"]
+radius = 29.8751
+
+[node name="Minigame" type="Node2D" node_paths=PackedStringArray("playerPath", "targetPath", "playerPathFollow", "scoreLabel")]
+script = ExtResource("1_m3qmg")
+targetScene = ExtResource("2_7eunl")
+playerPath = NodePath("PlayerPath")
+targetPath = NodePath("TargetPath")
+playerPathFollow = NodePath("PlayerPath/PathFollow2D")
+scoreLabel = NodePath("Panel/Container/Label")
+targetScore = 3
+
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 957.0
+offset_bottom = 542.0
+
+[node name="Container" type="Panel" parent="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -179.5
+offset_right = 179.5
+offset_bottom = 198.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Panel/Container"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 34.0
+grow_horizontal = 2
+text = " / "
+label_settings = SubResource("LabelSettings_shgy5")
+horizontal_alignment = 1
+
+[node name="MinigameExperimentHigherResolution" type="Sprite2D" parent="."]
+position = Vector2(482, 149)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_ux6p2")
+
+[node name="PlayerPath" type="Path2D" parent="."]
+position = Vector2(-86, -76)
+curve = SubResource("Curve2D_ibjcb")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="PlayerPath"]
+position = Vector2(300, 297)
+rotation = 1.2397
+
+[node name="Polygon2D" type="Polygon2D" parent="PlayerPath/PathFollow2D"]
+position = Vector2(2.12168, 6.37414)
+rotation = -1.49591
+scale = Vector2(1.06877, 0.914381)
+texture = SubResource("CurveTexture_4ut2e")
+polygon = PackedVector2Array(-19.3016, -15.0194, -19.8043, 16.4579, 31.5297, 15.8704, 31.7893, -15.2267)
+
+[node name="Area2D" type="Area2D" parent="PlayerPath/PathFollow2D/Polygon2D"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerPath/PathFollow2D/Polygon2D/Area2D"]
+visible = false
+shape = SubResource("CircleShape2D_l57ib")
+
+[node name="TargetPath" type="Path2D" parent="."]
+position = Vector2(-86, -76)
+curve = SubResource("Curve2D_ibjcb")
+
+[connection signal="area_entered" from="PlayerPath/PathFollow2D/Polygon2D/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="PlayerPath/PathFollow2D/Polygon2D/Area2D" to="." method="_on_area_2d_area_exited"]

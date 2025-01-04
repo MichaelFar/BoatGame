@@ -1,0 +1,89 @@
+[gd_scene load_steps=14 format=3 uid="uid://dqpt7cmtooaay"]
+
+[ext_resource type="Shader" path="res://shaders/water.gdshader" id="1_lntmd"]
+[ext_resource type="PackedScene" uid="uid://bwypfcrm8pcap" path="res://scenes/boat.tscn" id="2_xxkj0"]
+[ext_resource type="Material" uid="uid://bn5q2awkaaqq0" path="res://texture/testGroundMaterial.tres" id="4_g0lbg"]
+[ext_resource type="Material" uid="uid://vr636twri1b5" path="res://mesh/WoodFloorMaterial.tres" id="5_xoxwm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bkj8l"]
+render_priority = 0
+shader = ExtResource("1_lntmd")
+shader_parameter/speed = Vector2(0.2, 0.2)
+shader_parameter/voronoi_scale = 18.0
+shader_parameter/noise_scale = 0.21
+shader_parameter/color = Color(0.01, 0.586667, 1, 1)
+shader_parameter/light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ebies"]
+material = SubResource("ShaderMaterial_bkj8l")
+size = Vector2(3, 3)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f2o46"]
+friction = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rgrdx"]
+size = Vector3(316, 1.92719, 278)
+
+[sub_resource type="SphereMesh" id="SphereMesh_84iau"]
+material = ExtResource("4_g0lbg")
+
+[sub_resource type="BoxMesh" id="BoxMesh_tgg0j"]
+material = ExtResource("5_xoxwm")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5vk7v"]
+friction = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1n015"]
+size = Vector3(2.61585, 3.35791, 2.51648)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_33mll"]
+height = 0.715688
+radius = 0.568461
+
+[node name="overworld" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(98.5086, 0, 0, 0, 3.9529, 0, 0, 0, 89.5779, 0, 0.0514688, 0)
+mesh = SubResource("PlaneMesh_ebies")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.56638, 0)
+top_level = true
+collision_layer = 2
+collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_f2o46")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.10596, 0.463593, 2.99756)
+shape = SubResource("BoxShape3D_rgrdx")
+
+[node name="Boat" parent="." instance=ExtResource("2_xxkj0")]
+transform = Transform3D(0.999994, -0.00230478, -0.00281361, 0.00231061, 0.999995, 0.00207205, 0.00280882, -0.00207854, 0.999994, 0.20495, -0.314277, 0.612822)
+
+[node name="IslandMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(10.7408, 0, 0, 0, 6.52608, 0, 0, 0, 10.3303, 29.2379, 0, 0)
+mesh = SubResource("SphereMesh_84iau")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="IslandMesh"]
+transform = Transform3D(0.337186, 0, 0, 0, 0.0307603, 0, 0, 0, 0.187741, -0.568151, 0.0467891, -0.00648106)
+mesh = SubResource("BoxMesh_tgg0j")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="IslandMesh/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.1355, 0.305349, -0.0669513)
+top_level = true
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_5vk7v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="IslandMesh/MeshInstance3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.704105, 0.403112, 0.0915858)
+shape = SubResource("BoxShape3D_1n015")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="IslandMesh"]
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_5vk7v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="IslandMesh/StaticBody3D"]
+shape = SubResource("CylinderShape3D_33mll")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="IslandMesh"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.567122, 0.379191, -0.0509048)

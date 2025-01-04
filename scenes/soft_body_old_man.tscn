@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkn3jjf0wc56b"]
+
+[ext_resource type="ArrayMesh" uid="uid://bq1erhd88ptf4" path="res://resources/old_man.tres" id="1_wig74"]
+
+[node name="SoftBodyOldMan" type="SoftBody3D"]
+transform = Transform3D(0.999999, -0.00113383, 0.000942679, 0.0011341, 0.999999, -0.000280052, -0.000942359, 0.000281127, 0.999999, 0, 0, 0)
+mesh = ExtResource("1_wig74")
+total_mass = 60.01
+pressure_coefficient = 4.0
+
+[node name="OldManContainer" type="Node3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)

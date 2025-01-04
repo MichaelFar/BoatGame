@@ -1,0 +1,19 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://bh6ngc7n6gjkj"]
+
+[ext_resource type="Shader" uid="uid://1snl8tgo5r1v" path="res://texture/Sky.tres" id="1_blm1s"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o372h"]
+shader = ExtResource("1_blm1s")
+
+[sub_resource type="Sky" id="Sky_ss63b"]
+sky_material = SubResource("ShaderMaterial_o372h")
+
+[resource]
+background_mode = 2
+background_color = Color(0, 0, 0.670588, 1)
+sky = SubResource("Sky_ss63b")
+ambient_light_color = Color(0, 0.764706, 0.843137, 0.917647)
+fog_enabled = true
+fog_light_color = Color(0.494046, 0.691717, 0.912298, 1)
+fog_light_energy = 1.32
+fog_density = 0.1726

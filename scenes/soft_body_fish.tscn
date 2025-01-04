@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqy7taq62ypkn"]
+
+[ext_resource type="ArrayMesh" uid="uid://c0ocx2i7la0my" path="res://resources/fishmesh1.tres" id="1_80fbb"]
+
+[node name="SoftBodyFish" type="SoftBody3D"]
+mesh = ExtResource("1_80fbb")
+total_mass = 2.01
+pressure_coefficient = 4.0

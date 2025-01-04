@@ -1,0 +1,43 @@
+[gd_resource type="VisualShader" load_steps=5 format=3 uid="uid://1snl8tgo5r1v"]
+
+[sub_resource type="Gradient" id="Gradient_3ns08"]
+offsets = PackedFloat32Array(0, 0.515892)
+colors = PackedColorArray(0.886262, 0.886261, 0.886262, 1, 0, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6ipxh"]
+noise_type = 0
+frequency = 0.0201
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cgwgr"]
+color_ramp = SubResource("Gradient_3ns08")
+noise = SubResource("FastNoiseLite_6ipxh")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_38uky"]
+texture = SubResource("NoiseTexture2D_cgwgr")
+
+[resource]
+code = "shader_type sky;
+uniform sampler2D tex_sky_2;
+
+
+
+void sky() {
+// Texture2D:2
+	vec4 n_out2p0 = texture(tex_sky_2, vec2(0.0));
+
+
+// Output:0
+	COLOR = vec3(n_out2p0.xyz);
+
+
+}
+"
+mode = 3
+flags/use_half_res_pass = false
+flags/use_quarter_res_pass = false
+flags/disable_fog = false
+flags/use_debanding = false
+nodes/sky/0/position = Vector2(540, 80)
+nodes/sky/2/node = SubResource("VisualShaderNodeTexture_38uky")
+nodes/sky/2/position = Vector2(80, 80)
+nodes/sky/connections = PackedInt32Array(2, 0, 0, 0)
