@@ -99,9 +99,7 @@ func movement(delta):
 		tweenReference = tween
 	
 	if(Input.is_action_just_released("DebugSpawnFish")):
-		var fishScene = debugFishScene.instantiate()
-		add_child(fishScene)
-		fishScene.global_position = fishSpawnLocation.global_position
+		spawnFish()
 		
 	
 	accelerationAlpha = clampf(accelerationAlpha, 0, 1)
@@ -130,4 +128,9 @@ func _input(event: InputEvent) -> void:
 func emitParticleChildren(new_value : bool):
 	for i in particleContainer.get_children():
 		i.emitting = new_value
-		
+
+func spawnFish(fish_scene : PackedScene = debugFishScene):
+	
+	var fishScene = fish_scene.instantiate()
+	add_child(fishScene)
+	fishScene.global_position = fishSpawnLocation.global_position

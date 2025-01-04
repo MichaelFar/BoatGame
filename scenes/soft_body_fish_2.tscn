@@ -1,25 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmrla8wes5255"]
+[gd_scene load_steps=2 format=3 uid="uid://bmrla8wes5255"]
 
 [ext_resource type="ArrayMesh" uid="uid://chx8mvcqy71ph" path="res://resources/fishmesh2.tres" id="2_0ow3i"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ovoyt"]
-radius = 0.105298
-height = 0.464116
-
-[node name="SoftBodyFish" type="RigidBody3D"]
-mass = 0.2
-continuous_cd = true
-
-[node name="SoftBodyFish_2" type="SoftBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+[node name="SoftBodyFish_2" type="SoftBody3D"]
 mesh = ExtResource("2_0ow3i")
 collision_layer = 4
 collision_mask = 6
-parent_collision_ignore = NodePath("..")
 total_mass = 2.01
 linear_stiffness = 1.0
 pressure_coefficient = 60.0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_ovoyt")

@@ -4,5 +4,7 @@
 
 [node name="SoftBodyFish" type="SoftBody3D"]
 mesh = ExtResource("1_80fbb")
+collision_layer = 4
+collision_mask = 6
 total_mass = 2.01
 pressure_coefficient = 4.0

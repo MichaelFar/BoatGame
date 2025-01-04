@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://bwypfcrm8pcap"]
+[gd_scene load_steps=29 format=4 uid="uid://bwypfcrm8pcap"]
 
 [ext_resource type="PackedScene" uid="uid://ddcn5erk4fpk7" path="res://scenes/Wood_BoatV1.fbx" id="1_fpn1e"]
 [ext_resource type="Script" path="res://scenes/boat.gd" id="1_hl1kr"]
@@ -90,6 +90,14 @@ size = Vector3(0.936401, 0.82782, 1.46484)
 resource_local_to_scene = true
 size = Vector3(1.12, 0.82782, 1.46484)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_whlsg"]
+resource_local_to_scene = true
+size = Vector3(0.349457, 1.24289, 0.529296)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0nv8h"]
+resource_local_to_scene = true
+size = Vector3(0.191307, 1.24289, 0.529296)
+
 [sub_resource type="Animation" id="Animation_o2rcl"]
 length = 0.001
 tracks/0/type = "value"
@@ -149,6 +157,7 @@ fog_density = 0.1726
 physics_interpolation_mode = 1
 collision_layer = 2
 collision_mask = 7
+axis_lock_linear_y = true
 script = ExtResource("1_hl1kr")
 cameraRotator = NodePath("CameraRotator")
 boatMesh = NodePath("Wood_BoatV1")
@@ -241,6 +250,14 @@ shape = SubResource("BoxShape3D_yfoa2")
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
 transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, -3.35173e-21, -4.37114e-08, 1, -4.37114e-08, -0.0379767, 0.752719, -2.01772)
 shape = SubResource("BoxShape3D_e6n4x")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="."]
+transform = Transform3D(8.74228e-08, -1, 4.37114e-08, 4.37114e-08, 4.37114e-08, 1, -1, -8.74228e-08, 4.37114e-08, 0.00936842, 0.549115, -0.306754)
+shape = SubResource("BoxShape3D_whlsg")
+
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="."]
+transform = Transform3D(8.74228e-08, -1, 4.37114e-08, 4.37114e-08, 4.37114e-08, 1, -1, -8.74228e-08, 4.37114e-08, 0.00936842, 0.549115, 0.307274)
+shape = SubResource("BoxShape3D_0nv8h")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
